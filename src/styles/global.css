@@ -210,3 +210,8 @@ body {
 .spin-slow {
   animation: spin-slow 20s linear infinite;
 }
+#begin-journey-btn {
+    display: block; 
+    opacity: 1;
+    visibility: visible;
+}
