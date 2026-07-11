@@ -10,7 +10,7 @@ const Intro = () => {
   const navigate = useNavigate()
   const [currentLine, setCurrentLine] = useState(0)
   const [showTitle, setShowTitle] = useState(false)
-  const [showButton, setShowButton] = useState(true) // ✅ CHANGED: Start as true
+  const [showButton, setShowButton] = useState(false)
   const [showAllText, setShowAllText] = useState(false)
   const [shootingStars, setShootingStars] = useState([])
   const [titleGlow, setTitleGlow] = useState(0)
@@ -102,7 +102,7 @@ const Intro = () => {
     return () => clearInterval(interval)
   }, [isMobile])
 
-  // Text progression - ✅ MODIFIED: Button shows immediately
+  // Text progression
   useEffect(() => {
     let lineIndex = 0
     
@@ -116,8 +116,9 @@ const Intro = () => {
         timeoutRef.current = setTimeout(() => {
           setShowTitle(true)
           soundManager.playChime()
-          // ✅ REMOVED: The timeout that showed the button later
-          // Button is already visible from the start
+          timeoutRef.current = setTimeout(() => {
+            setShowButton(true)
+          }, isMobile ? 2500 : 2000)
         }, isMobile ? 1800 : 1500)
       }
     }
@@ -457,12 +458,11 @@ const Intro = () => {
                 </motion.div>
               </div>
 
-              {/* ✅ CHANGED: Button now shows immediately when title appears */}
               {showButton && (
                 <motion.div
                   initial={{ scale: 0.5, opacity: 0, y: 20 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
-                  transition={{ type: 'spring', damping: 15, delay: 0 }} {/* ✅ REMOVED: delay */}
+                  transition={{ type: 'spring', damping: 15, delay: isMobile ? 0.3 : 0.5 }}
                 >
                   <motion.div
                     whileHover={!isMobile ? { scale: 1.08 } : {}}
