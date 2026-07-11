@@ -10,7 +10,7 @@ const Intro = () => {
   const navigate = useNavigate()
   const [currentLine, setCurrentLine] = useState(0)
   const [showTitle, setShowTitle] = useState(false)
-  const [showButton, setShowButton] = useState(false)
+  const [showButton, setShowButton] = useState(true)
   const [showAllText, setShowAllText] = useState(false)
   const [shootingStars, setShootingStars] = useState([])
   const [titleGlow, setTitleGlow] = useState(0)
